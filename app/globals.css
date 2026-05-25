@@ -1,0 +1,64 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: "Anthropic Sans";
+  src: url("../font/local/anthropic-sans.woff2") format("woff2");
+  font-weight: 300 800;
+  font-style: normal;
+  font-display: swap;
+  font-feature-settings: "dlig" 0;
+}
+
+@font-face {
+  font-family: "Anthropic Sans";
+  src: url("../font/local/anthropic-sans-italic.woff2") format("woff2");
+  font-weight: 300 800;
+  font-style: italic;
+  font-display: swap;
+  font-feature-settings: "dlig" 0;
+}
+
+@font-face {
+  font-family: "Anthropic Serif";
+  src: url("../font/local/anthropic-serif.woff2") format("woff2");
+  font-weight: 300 800;
+  font-style: normal;
+  font-display: swap;
+  font-feature-settings: "dlig" 0;
+}
+
+@font-face {
+  font-family: "Anthropic Serif";
+  src: url("../font/local/anthropic-serif-italic.woff2") format("woff2");
+  font-weight: 300 800;
+  font-style: italic;
+  font-display: swap;
+  font-feature-settings: "dlig" 0;
+}
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  --font-sans-stack: "Anthropic Sans", system-ui, sans-serif;
+  --font-serif-stack: "Anthropic Serif", Georgia, serif;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-sans-stack);
+  --font-serif: var(--font-serif-stack);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans-stack);
+}
