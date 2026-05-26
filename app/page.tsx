@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { AboutSection } from "./components/about-section";
+import { FooterArcade } from "./components/footer-arcade";
 import { SiteMenu } from "./components/site-menu";
 
 export default function Home() {
@@ -38,6 +39,19 @@ export default function Home() {
 
           <div className="sm:hidden">
             <AboutSection />
+          </div>
+          <div><h3 className="text-3xl">Proficiencies</h3></div>
+          <div>B</div>
+          <div><h3 className="text-3xl">Work</h3></div>
+          <div>B</div>
+          <div><h3 className="text-3xl">Certificates</h3></div>
+          <div>B</div>
+          <div><h3 className="text-3xl">Projects</h3></div>
+          <div>B</div>
+          <div><h3 className="text-3xl">Contact</h3></div>
+          <div>B</div>
+          <div className="col-span-2">
+            <FooterArcade />
           </div>
         </div>
       </main>

@@ -5,7 +5,7 @@ import { Menu, X } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import { forwardRef, useEffect, useState } from "react";
 
-const SITE_TITLE = "@ziadymubaraq";
+const SITE_TITLE = "@ziadyjo";
 
 const navLinks = [
   { href: "/proficiencies", label: "Proficiencies" },
