@@ -22,7 +22,7 @@ export function AboutSection() {
           </li>
         </ul>
       </div>
-      <p className="text-foreground-secondary pt-4">Obsessed with AI before it was cool. I build multi-agent systems, RAG pipelines & production AI systems that businesses run on 24/7. No fluff.</p>
+      <p className="text-foreground-secondary pt-4">Obsessed with AI before it was cool. I build multi-agent systems, RAG pipelines, and production AI systems that businesses run on 24/7. No fluff.</p>
     </>
   );
 }
