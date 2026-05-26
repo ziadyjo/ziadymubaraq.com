@@ -3,6 +3,7 @@
 import type { LucideIcon } from "lucide-react";
 import { ArrowRight, Asterisk, Layers, LibraryBig } from "lucide-react";
 import Link from "next/link";
+import type { Transition, Variants } from "motion/react";
 import { motion } from "motion/react";
 
 type Project = {
@@ -39,6 +40,28 @@ const PROJECTS: Project[] = [
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
+const ICON_SHIFT = 106;
+
+const CARD_SHADOW =
+  "rgba(0,0,0,0.24) 0px 0.706592px 0.423955px -0.5px, rgba(0,0,0,0.24) 0px 1.80656px 1.08394px -1px, rgba(0,0,0,0.23) 0px 3.62176px 2.17306px -1.5px, rgba(0,0,0,0.22) 0px 6.8656px 4.11936px -2px, rgba(0,0,0,0.2) 0px 13.6468px 8.18806px -2.5px, rgba(0,0,0,0.16) 0px 30px 18px -3px";
+
+const SLIDE_SPRING: Transition = { type: "spring", stiffness: 460, damping: 28 };
+
+const contentVariants: Variants = {
+  rest: { x: 0 },
+  hover: { x: ICON_SHIFT },
+};
+
+const textVariants: Variants = {
+  rest: { opacity: 1 },
+  hover: { opacity: 0 },
+};
+
+const viewVariants: Variants = {
+  rest: { scale: 1, opacity: 0 },
+  hover: { scale: 1, opacity: 1 },
+};
+
 export function ProjectsSection() {
   return (
     <div className="relative">
@@ -73,54 +96,31 @@ function ProjectCard({ name, description, href, Icon, iconColor }: Project) {
       initial="rest"
       animate="rest"
       whileHover="hover"
-      className="relative overflow-hidden rounded-2xl bg-button-secondary ring-1 ring-black/40"
-      style={{ boxShadow: "rgba(0,0,0,0.24) 0px 0.706592px 0.423955px -0.5px, rgba(0,0,0,0.24) 0px 1.80656px 1.08394px -1px, rgba(0,0,0,0.23) 0px 3.62176px 2.17306px -1.5px, rgba(0,0,0,0.22) 0px 6.8656px 4.11936px -2px, rgba(0,0,0,0.2) 0px 13.6468px 8.18806px -2.5px, rgba(0,0,0,0.16) 0px 30px 18px -3px" }}
+      transition={{ duration: 0.45, ease: EASE }}
+      className="relative overflow-hidden rounded-2xl border border-button-secondary-border bg-button-secondary-background text-button-secondary-text transition-colors hover:border-button-secondary-border-hover hover:bg-button-secondary-background-hover hover:text-button-secondary-text-hover"
+      style={{ boxShadow: CARD_SHADOW }}
     >
-      <Link
-        href={href}
-        className="block"
-        aria-label={`View ${name} project`}
-      >
-        <motion.div
-          variants={{
-            rest: { x: 0, opacity: 1 },
-            hover: { x: 24, opacity: 0 },
-          }}
-          transition={{ duration: 0.35, ease: EASE }}
-          className="flex items-center gap-3 p-3"
-        >
-          <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-button-tertiary-background">
-            <Icon
-              className="h-6 w-6"
-              style={{ color: iconColor }}
-              strokeWidth={2.2}
-            />
-          </div>
-          <div className="flex min-w-0 flex-col">
-            <h4 className="text-md font-medium text-foreground-primary">{name}</h4>
-            <p className="truncate text-sm text-foreground-tertiary">
-              {description}
-            </p>
+      <Link href={href} className="block" aria-label={`View ${name} project`}>
+        <motion.div variants={contentVariants} transition={SLIDE_SPRING} className="p-3">
+          <div className="flex items-center gap-3">
+            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-button-tertiary-background">
+              <Icon className="h-6 w-6" style={{ color: iconColor }} strokeWidth={2.2} />
+            </div>
+            <motion.div variants={textVariants} className="flex min-w-0 flex-col">
+              <h4 className="text-md font-medium text-foreground-primary">{name}</h4>
+              <p className="truncate text-sm text-foreground-tertiary">{description}</p>
+            </motion.div>
           </div>
         </motion.div>
 
-        <motion.div
-          variants={{
-            rest: { x: -24, opacity: 0 },
-            hover: { x: 0, opacity: 1 },
-          }}
-          transition={{ duration: 0.35, ease: EASE }}
-          className="pointer-events-none absolute inset-0 flex items-center gap-3 p-3"
-        >
-          <span className="inline-flex items-center gap-2 rounded-xl bg-button-tertiary-background px-4 py-2 text-md text-foreground-primary">
+        <div className="pointer-events-none absolute inset-0 flex items-center p-3">
+          <motion.span
+            variants={viewVariants}
+            className="inline-flex h-12 origin-left items-center gap-2 rounded-xl bg-button-tertiary-background px-4 text-md text-foreground-primary"
+          >
             View <ArrowRight className="h-4 w-4" />
-          </span>
-          <Icon
-            className="h-6 w-6"
-            style={{ color: iconColor }}
-            strokeWidth={2.2}
-          />
-        </motion.div>
+          </motion.span>
+        </div>
       </Link>
     </motion.div>
   );
