@@ -187,9 +187,7 @@ export function FooterArcade() {
 
   return (
     <section className="w-full pt-10">
-      <h2 className="py-12 text-center font-serif text-3xl font-medium text-foreground-primary">
-        Footer arcade
-      </h2>
+
 
       <div className="mt-6 flex items-center justify-between gap-4">
         <AnimatePresence mode="wait">

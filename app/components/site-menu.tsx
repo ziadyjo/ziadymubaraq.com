@@ -99,9 +99,19 @@ export function SiteMenu() {
 
   return (
     <header className="sticky top-0 z-50 w-full bg-background-primary">
-      <div className="border-b border-button-secondary-background">
-        {/* In-flow panel above the bar: opening pushes the @ziadyjo / Menu
-            bar down to the bottom of the navbar. */}
+      <div className="relative border-b border-button-secondary-background">
+        <div className="mx-auto flex w-full max-w-3xl items-center justify-between py-4 px-10 md:px-0">
+          <Link
+            href="/"
+            className="text-md text-foreground-secondary transition-colors hover:text-foreground-primary"
+          >
+            {SITE_TITLE}
+          </Link>
+          <MenuButton open={open} onClick={() => setOpen((value) => !value)} />
+        </div>
+
+        {/* Overlay panel below the bar: absolutely positioned so opening
+            drops it over the page content instead of pushing it down. */}
         <AnimatePresence initial={false} onExitComplete={handleExitComplete}>
           {open && (
             <motion.div
@@ -111,9 +121,9 @@ export function SiteMenu() {
               animate={{ height: "auto", opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
               transition={{ duration: closingForNav ? 0 : 0.2, ease: menuEase }}
-              className="w-full overflow-hidden"
+              className="absolute left-0 top-full w-full overflow-hidden border-b border-button-secondary-background bg-background-primary"
             >
-              <nav aria-label="Site navigation" className="pt-4">
+              <nav aria-label="Site navigation" className="pb-4">
                 {navLinks.map(({ href, label }, index) => (
                   <motion.div
                     key={label}
@@ -142,16 +152,6 @@ export function SiteMenu() {
             </motion.div>
           )}
         </AnimatePresence>
-
-        <div className="mx-auto flex w-full max-w-3xl items-center justify-between py-4 px-10 md:px-0">
-          <Link
-            href="/"
-            className="text-md text-foreground-secondary transition-colors hover:text-foreground-primary"
-          >
-            {SITE_TITLE}
-          </Link>
-          <MenuButton open={open} onClick={() => setOpen((value) => !value)} />
-        </div>
       </div>
     </header>
   );

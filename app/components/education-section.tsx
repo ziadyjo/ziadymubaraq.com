@@ -58,11 +58,11 @@ function EducationItem({
         <h4 className="text-lg text-foreground-primary">{degree}</h4>
       </div>
 
-      <dl className="flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-foreground-tertiary">
+      <dl className="flex flex-wrap items-center gap-x-2 gap-y-1 text-md md:text-sm text-foreground-tertiary">
         <dd>{period}</dd>
-        <span aria-hidden className="text-button-tertiary-border-hover">&middot;</span>
+        <span aria-hidden className="text-foreground-tertiary">&middot;</span>
         <dd>{institution}</dd>
-        <span aria-hidden className="text-button-tertiary-border-hover">&middot;</span>
+        <span aria-hidden className="text-foreground-tertiary">&middot;</span>
         <dd>{location}</dd>
       </dl>
 

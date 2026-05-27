@@ -63,17 +63,17 @@ function WorkItem({
       <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
         <h4 className="text-lg text-foreground-primary">{role}</h4>
         {current && (
-          <span className="rounded-md bg-accent-background px-2 py-0.5 text-sm text-accent-text">
+          <span className="rounded-md bg-[#c96442] px-2 py-0.5 text-sm text-foreground">
             Current
           </span>
         )}
       </div>
 
-      <dl className="flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-foreground-tertiary">
+      <dl className="flex flex-wrap items-center gap-x-2 gap-y-1 text-md md:text-sm text-foreground-tertiary">
         <dd>{period}</dd>
-        <span aria-hidden className="text-button-tertiary-border-hover">&middot;</span>
+        <span aria-hidden className="text-foreground-tertiary">&middot;</span>
         <dd>{company}</dd>
-        <span aria-hidden className="text-button-tertiary-border-hover">&middot;</span>
+        <span aria-hidden className="text-foreground-tertiary">&middot;</span>
         <dd>{location}</dd>
       </dl>
 

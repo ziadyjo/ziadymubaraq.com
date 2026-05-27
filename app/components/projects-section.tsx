@@ -1,7 +1,8 @@
 "use client";
 
 import type { LucideIcon } from "lucide-react";
-import { ArrowRight, Asterisk, Layers, LibraryBig } from "lucide-react";
+import { ArrowRight, LibraryBig } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import type { Transition, Variants } from "motion/react";
 import { motion } from "motion/react";
@@ -10,31 +11,41 @@ type Project = {
   name: string;
   description: string;
   href: string;
-  Icon: LucideIcon;
-  iconColor: string;
+  logo?: string;
+  Icon?: LucideIcon;
+  iconColor?: string;
 };
 
 const PROJECTS: Project[] = [
   {
-    name: "Shelf",
-    description: "Digital Library for Developers",
+    name: "Lunash",
+    description: "AI-powered SaaS platform automating debt collection at scale",
     href: "#",
-    Icon: LibraryBig,
-    iconColor: "#ffffff",
+    logo: "/lunash.webp",
   },
   {
-    name: "Locale",
-    description: "Lightweight Content Localization",
+    name: "AL+ Agent",
+    description: "WhatsApp AI agent for conversations and lead qualification",
     href: "#",
-    Icon: Asterisk,
-    iconColor: "#f5b393",
+    logo: "/alplus.webp",
   },
   {
-    name: "Taskly",
-    description: "Minimal Task Manager",
+    name: "Auto Agent",
+    description: "Chrome Extension automating data entry and navigation",
     href: "#",
-    Icon: Layers,
-    iconColor: "#5b6cff",
+    logo: "/autoagent.webp",
+  },
+  {
+    name: "Speed Online",
+    description: "Mobile app for booking ferry crossing tickets",
+    href: "#",
+    logo: "/speedonline.webp",
+  },
+  {
+    name: "Dicicilaja",
+    description: "Adira Finance marketplace app with 100K+ downloads",
+    href: "#",
+    logo: "/dicicilaja.webp",
   },
 ];
 
@@ -90,7 +101,7 @@ export function ProjectsSection() {
   );
 }
 
-function ProjectCard({ name, description, href, Icon, iconColor }: Project) {
+function ProjectCard({ name, description, href, logo, Icon, iconColor }: Project) {
   return (
     <motion.div
       initial="rest"
@@ -103,8 +114,20 @@ function ProjectCard({ name, description, href, Icon, iconColor }: Project) {
       <Link href={href} className="block" aria-label={`View ${name} project`}>
         <motion.div variants={contentVariants} transition={SLIDE_SPRING} className="p-3">
           <div className="flex items-center gap-3">
-            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-button-tertiary-background">
-              <Icon className="h-6 w-6" style={{ color: iconColor }} strokeWidth={2.2} />
+            <div className="flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-button-tertiary-background">
+              {logo ? (
+                <Image
+                  src={logo}
+                  alt={`${name} logo`}
+                  width={32}
+                  height={32}
+                  className="h-8 w-8 object-contain"
+                />
+              ) : (
+                Icon && (
+                  <Icon className="h-6 w-6" style={{ color: iconColor }} strokeWidth={2.2} />
+                )
+              )}
             </div>
             <motion.div variants={textVariants} className="flex min-w-0 flex-col">
               <h4 className="text-md font-medium text-foreground-primary">{name}</h4>

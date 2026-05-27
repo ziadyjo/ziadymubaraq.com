@@ -12,7 +12,7 @@ import { SiteMenu } from "./components/site-menu";
 import { WorkSection } from "./components/work-section";
 
 const contactLinkClass =
-  "inline-flex items-center gap-2 rounded-lg px-3 py-1.5 text-foreground-tertiary transition-colors hover:bg-background-tertiary hover:text-foreground-primary";
+  "inline-flex items-center gap-2 rounded-lg px-3 py-1.5 text-foreground-secondary transition-colors hover:bg-background-tertiary hover:text-foreground-primary";
 
 const REVEAL_EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -168,6 +168,16 @@ export default function Home() {
                   className={contactLinkClass}
                 >
                   LinkedIn <ArrowRight className="h-4 w-4" />
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="https://www.x.com/ziadyjo/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={contactLinkClass}
+                >
+                  X <ArrowRight className="h-4 w-4" />
                 </Link>
               </li>
             </ul>
