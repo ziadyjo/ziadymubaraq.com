@@ -1,0 +1,131 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: "Anthropic Sans";
+  src: url("../font/local/anthropic-sans.woff2") format("woff2");
+  font-weight: 300 800;
+  font-style: normal;
+  font-display: swap;
+  font-feature-settings: "dlig" 0;
+}
+
+@font-face {
+  font-family: "Anthropic Sans";
+  src: url("../font/local/anthropic-sans-italic.woff2") format("woff2");
+  font-weight: 300 800;
+  font-style: italic;
+  font-display: swap;
+  font-feature-settings: "dlig" 0;
+}
+
+@font-face {
+  font-family: "Anthropic Serif";
+  src: url("../font/local/anthropic-serif.woff2") format("woff2");
+  font-weight: 300 800;
+  font-style: normal;
+  font-display: swap;
+  font-feature-settings: "dlig" 0;
+}
+
+@font-face {
+  font-family: "Anthropic Serif";
+  src: url("../font/local/anthropic-serif-italic.woff2") format("woff2");
+  font-weight: 300 800;
+  font-style: italic;
+  font-display: swap;
+  font-feature-settings: "dlig" 0;
+}
+
+:root {
+  --background-primary: #141413;
+  --background-secondary: #1a1918;
+  --background-tertiary: #1f1e1d;
+  --foreground-primary: #faf9f5;
+  --foreground-secondary: #b0aea5;
+  --foreground-tertiary: #87867f;
+
+  --button-primary-background: #faf9f5;
+  --button-primary-text: #141413;
+  --button-primary-border: transparent;
+  --button-primary-icon: #141413;
+  --button-primary-background-hover: #faf9f5;
+  --button-primary-text-hover: #141413;
+  --button-primary-border-hover: transparent;
+  --button-primary-icon-hover: #141413;
+
+  --button-secondary-background: #30302e;
+  --button-secondary-text: #faf9f5;
+  --button-secondary-border: #3d3d3a;
+  --button-secondary-icon: #faf9f5;
+  --button-secondary-background-hover: #30302e;
+  --button-secondary-text-hover: #faf9f5;
+  --button-secondary-border-hover: #30302e;
+  --button-secondary-icon-hover: #b0aea5;
+
+  --button-tertiary-background: #141413;
+  --button-tertiary-text: #faf9f5;
+  --button-tertiary-border: #3d3d3a;
+  --button-tertiary-icon: #faf9f5;
+  --button-tertiary-background-hover: #1f1e1d;
+  --button-tertiary-text-hover: #faf9f5;
+  --button-tertiary-border-hover: #5e5d59;
+  --button-tertiary-icon-hover: #faf9f5;
+
+  --accent-background: #3a2318;
+  --accent-text: #d97757;
+
+  --font-sans-stack: "Anthropic Sans", system-ui, sans-serif;
+  --font-serif-stack: "Anthropic Serif", Georgia, serif;
+}
+
+@theme inline {
+  --color-background-primary: var(--background-primary);
+  --color-background-secondary: var(--background-secondary);
+  --color-background-tertiary: var(--background-tertiary);
+  --color-foreground-primary: var(--foreground-primary);
+  --color-foreground-secondary: var(--foreground-secondary);
+  --color-foreground-tertiary: var(--foreground-tertiary);
+
+  --color-button-primary-background: var(--button-primary-background);
+  --color-button-primary-text: var(--button-primary-text);
+  --color-button-primary-border: var(--button-primary-border);
+  --color-button-primary-icon: var(--button-primary-icon);
+  --color-button-primary-background-hover: var(--button-primary-background-hover);
+  --color-button-primary-text-hover: var(--button-primary-text-hover);
+  --color-button-primary-border-hover: var(--button-primary-border-hover);
+  --color-button-primary-icon-hover: var(--button-primary-icon-hover);
+
+  --color-button-secondary-background: var(--button-secondary-background);
+  --color-button-secondary-text: var(--button-secondary-text);
+  --color-button-secondary-border: var(--button-secondary-border);
+  --color-button-secondary-icon: var(--button-secondary-icon);
+  --color-button-secondary-background-hover: var(--button-secondary-background-hover);
+  --color-button-secondary-text-hover: var(--button-secondary-text-hover);
+  --color-button-secondary-border-hover: var(--button-secondary-border-hover);
+  --color-button-secondary-icon-hover: var(--button-secondary-icon-hover);
+
+  --color-button-tertiary-background: var(--button-tertiary-background);
+  --color-button-tertiary-text: var(--button-tertiary-text);
+  --color-button-tertiary-border: var(--button-tertiary-border);
+  --color-button-tertiary-icon: var(--button-tertiary-icon);
+  --color-button-tertiary-background-hover: var(--button-tertiary-background-hover);
+  --color-button-tertiary-text-hover: var(--button-tertiary-text-hover);
+  --color-button-tertiary-border-hover: var(--button-tertiary-border-hover);
+  --color-button-tertiary-icon-hover: var(--button-tertiary-icon-hover);
+
+  --color-accent-background: var(--accent-background);
+  --color-accent-text: var(--accent-text);
+
+  --font-sans: var(--font-sans-stack);
+  --font-serif: var(--font-serif-stack);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background-primary);
+  color: var(--foreground-primary);
+  font-family: var(--font-sans-stack);
+}
