@@ -1,56 +1,15 @@
 "use client";
 
-import type { LucideIcon } from "lucide-react";
-import { ArrowRight, LibraryBig } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import type { Transition, Variants } from "motion/react";
 import { motion } from "motion/react";
+import type { Project } from "@/types";
+import { PROJECTS } from "@/data/projects";
+import { REVEAL_EASE } from "@/lib/motion";
 
-type Project = {
-  name: string;
-  description: string;
-  href: string;
-  logo?: string;
-  Icon?: LucideIcon;
-  iconColor?: string;
-};
-
-const PROJECTS: Project[] = [
-  {
-    name: "Lunash",
-    description: "AI-powered SaaS platform automating debt collection at scale",
-    href: "#",
-    logo: "/lunash.webp",
-  },
-  {
-    name: "AL+ Agent",
-    description: "WhatsApp AI agent for conversations and lead qualification",
-    href: "#",
-    logo: "/alplus.webp",
-  },
-  {
-    name: "Auto Agent",
-    description: "Chrome Extension automating data entry and navigation",
-    href: "#",
-    logo: "/autoagent.webp",
-  },
-  {
-    name: "Speed Online",
-    description: "Mobile app for booking ferry crossing tickets",
-    href: "#",
-    logo: "/speedonline.webp",
-  },
-  {
-    name: "Dicicilaja",
-    description: "Adira Finance marketplace app with 100K+ downloads",
-    href: "#",
-    logo: "/dicicilaja.webp",
-  },
-];
-
-const EASE = [0.16, 1, 0.3, 1] as const;
-
+/** How far the card content slides to reveal the "View" affordance on hover. */
 const ICON_SHIFT = 106;
 
 const CARD_SHADOW =
@@ -73,12 +32,12 @@ const viewVariants: Variants = {
   hover: { scale: 1, opacity: 1 },
 };
 
-export function ProjectsSection() {
+export function Projects() {
   return (
     <div className="relative">
       <div
         aria-hidden
-        className="pointer-events-none absolute left-[-50%] -right-8 -inset-y-16"
+        className="pointer-events-none absolute -inset-y-16 -right-8 left-[-50%]"
         style={{
           backgroundImage: `
             linear-gradient(to right, rgba(255,255,255,0.06) 1px, transparent 1px),
@@ -94,20 +53,40 @@ export function ProjectsSection() {
       />
       <div className="relative flex flex-col gap-8">
         {PROJECTS.map((project) => (
-          <ProjectCard key={project.name} {...project} />
+          <ProjectCard key={project.name} project={project} />
         ))}
       </div>
     </div>
   );
 }
 
-function ProjectCard({ name, description, href, logo, Icon, iconColor }: Project) {
+function ProjectVisual({ project }: { project: Project }) {
+  if ("logo" in project) {
+    return (
+      <Image
+        src={project.logo}
+        alt={`${project.name} logo`}
+        width={32}
+        height={32}
+        className="h-8 w-8 object-contain"
+      />
+    );
+  }
+
+  const Icon = project.icon;
+  return (
+    <Icon className="h-6 w-6" style={{ color: project.iconColor }} strokeWidth={2.2} />
+  );
+}
+
+function ProjectCard({ project }: { project: Project }) {
+  const { name, description, href } = project;
   return (
     <motion.div
       initial="rest"
       animate="rest"
       whileHover="hover"
-      transition={{ duration: 0.45, ease: EASE }}
+      transition={{ duration: 0.45, ease: REVEAL_EASE }}
       className="relative overflow-hidden rounded-2xl border border-button-secondary-border bg-button-secondary-background text-button-secondary-text transition-colors hover:border-button-secondary-border-hover hover:bg-button-secondary-background-hover hover:text-button-secondary-text-hover"
       style={{ boxShadow: CARD_SHADOW }}
     >
@@ -115,22 +94,10 @@ function ProjectCard({ name, description, href, logo, Icon, iconColor }: Project
         <motion.div variants={contentVariants} transition={SLIDE_SPRING} className="p-3">
           <div className="flex items-center gap-3">
             <div className="flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-button-tertiary-background">
-              {logo ? (
-                <Image
-                  src={logo}
-                  alt={`${name} logo`}
-                  width={32}
-                  height={32}
-                  className="h-8 w-8 object-contain"
-                />
-              ) : (
-                Icon && (
-                  <Icon className="h-6 w-6" style={{ color: iconColor }} strokeWidth={2.2} />
-                )
-              )}
+              <ProjectVisual project={project} />
             </div>
             <motion.div variants={textVariants} className="flex min-w-0 flex-col">
-              <h4 className="text-md font-medium text-foreground-primary">{name}</h4>
+              <h3 className="text-base font-medium text-foreground-primary">{name}</h3>
               <p className="truncate text-sm text-foreground-tertiary">{description}</p>
             </motion.div>
           </div>
@@ -139,7 +106,7 @@ function ProjectCard({ name, description, href, logo, Icon, iconColor }: Project
         <div className="pointer-events-none absolute inset-0 flex items-center p-3">
           <motion.span
             variants={viewVariants}
-            className="inline-flex h-12 origin-left items-center gap-2 rounded-xl bg-button-tertiary-background px-4 text-md text-foreground-primary"
+            className="inline-flex h-12 origin-left items-center gap-2 rounded-xl bg-button-tertiary-background px-4 text-base text-foreground-primary"
           >
             View <ArrowRight className="h-4 w-4" />
           </motion.span>

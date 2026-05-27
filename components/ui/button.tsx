@@ -1,16 +1,18 @@
-import { type LucideIcon } from "lucide-react";
+import type { ComponentPropsWithoutRef } from "react";
+import type { LucideIcon } from "lucide-react";
+import { cn } from "@/lib/cn";
 
 type ButtonVariant = "primary" | "secondary" | "tertiary";
 type ButtonSize = "sm" | "md" | "lg";
 
-type ButtonProps = React.ComponentPropsWithoutRef<"button"> & {
+interface ButtonProps extends ComponentPropsWithoutRef<"button"> {
   variant?: ButtonVariant;
   size?: ButtonSize;
   icon?: LucideIcon;
   iconPosition?: "left" | "right";
-};
+}
 
-const variantClasses: Record<ButtonVariant, string> = {
+const VARIANT_CLASSES = {
   primary: [
     "bg-button-primary-background text-button-primary-text border-button-primary-border",
     "hover:bg-button-primary-background-hover hover:text-button-primary-text-hover hover:border-button-primary-border-hover",
@@ -26,13 +28,13 @@ const variantClasses: Record<ButtonVariant, string> = {
     "hover:bg-button-tertiary-background-hover hover:text-button-tertiary-text-hover hover:border-button-tertiary-border-hover",
     "[&_svg]:text-button-tertiary-icon hover:[&_svg]:text-button-tertiary-icon-hover",
   ].join(" "),
-};
+} satisfies Record<ButtonVariant, string>;
 
-const sizeClasses: Record<ButtonSize, string> = {
+const SIZE_CLASSES = {
   sm: "h-8 gap-1.5 rounded-lg px-3 text-sm",
-  md: "h-10 gap-2 rounded-xl px-4 text-md",
-  lg: "h-12 gap-2.5 rounded-xl px-5 text-md",
-};
+  md: "h-10 gap-2 rounded-xl px-4 text-base",
+  lg: "h-12 gap-2.5 rounded-xl px-5 text-base",
+} satisfies Record<ButtonSize, string>;
 
 export function Button({
   variant = "primary",
@@ -41,25 +43,28 @@ export function Button({
   iconPosition = "right",
   className,
   children,
+  type = "button",
   ...props
 }: ButtonProps) {
+  const renderIcon = () =>
+    Icon ? <Icon className="size-4 shrink-0" strokeWidth={2} /> : null;
+
   return (
     <button
-      className={[
+      type={type}
+      className={cn(
         "inline-flex cursor-pointer items-center justify-center border font-medium outline-none transition-colors",
         "focus-visible:ring-2 focus-visible:ring-button-tertiary-border-hover focus-visible:ring-offset-2 focus-visible:ring-offset-background-primary",
         "disabled:pointer-events-none disabled:opacity-40",
-        variantClasses[variant],
-        sizeClasses[size],
+        VARIANT_CLASSES[variant],
+        SIZE_CLASSES[size],
         className,
-      ]
-        .filter(Boolean)
-        .join(" ")}
+      )}
       {...props}
     >
-      {Icon && iconPosition === "left" && <Icon className="size-4 shrink-0" strokeWidth={2} />}
+      {iconPosition === "left" && renderIcon()}
       {children}
-      {Icon && iconPosition === "right" && <Icon className="size-4 shrink-0" strokeWidth={2} />}
+      {iconPosition === "right" && renderIcon()}
     </button>
   );
 }
